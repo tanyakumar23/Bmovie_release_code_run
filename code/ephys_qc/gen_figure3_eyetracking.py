@@ -93,7 +93,9 @@ def main(nwb_input_dir):
             problem_inds_y = np.logical_not(gaze_df['GazeY'].astype(float).between(0,frame_height,
                                                                                    inclusive='left'))
             problem_inds = np.logical_or(problem_inds_x, problem_inds_y)
-            gaze_df.loc[problem_inds,['GazeX','GazeY']] = np.NaN
+            # gaze_df.loc[problem_inds,['GazeX','GazeY']] = np.NaN  # prev
+            # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+            gaze_df.loc[problem_inds,['GazeX','GazeY']] = np.nan
         
         
             # Downsample gaze data to the video frame rate
@@ -159,7 +161,9 @@ def main(nwb_input_dir):
                     subj2agg_corrs[sub_idx, tii] = np.corrcoef(agg_hmap.ravel(), subj_hmap.ravel())[0,1]
                     
                 else:
-                    subj2agg_corrs[sub_idx, tii] = np.NaN
+                    # subj2agg_corrs[sub_idx, tii] = np.NaN  # prev
+                    # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+                    subj2agg_corrs[sub_idx, tii] = np.nan
                     
     
     # report overall ET correlations

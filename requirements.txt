@@ -1,0 +1,36 @@
+# Requirements file generated from make_env.yml
+# Note: Some packages may need conda for optimal installation (e.g., mne-base, hdf5)
+# If you encounter issues, consider installing Anaconda/Miniconda
+
+# Core scientific computing
+pandas>=2.0.0
+numpy>=1.24.0
+scipy>=1.10.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Neuroimaging and data formats
+pynwb>=2.5.0
+nibabel>=5.0.0
+nilearn>=0.10.0
+h5py>=3.9.0  # Alternative to hdf5 conda package
+
+# MNE-Python (base version)
+mne>=1.6.0
+
+# Data download tools
+dandi>=0.60.0
+datalad>=0.19.0
+
+# Additional utilities
+pymatreader>=0.0.28
+resampy>=0.4.0
+ipython>=8.0.0
+notebook>=7.0.0
+
+# Pip-only packages
+nwbinspector>=0.5.0
+templateflow>=0.9.0
+pycortex>=1.2.0

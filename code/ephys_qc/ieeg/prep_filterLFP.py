@@ -132,12 +132,14 @@ def main(nwb_input_dir, lfp_process_dir):
                                     f'{os.path.splitext(session_id)[0]}_{task_ii}_{etype}_{bp}.fif')
             
                     # apply Morlet filters
+                    # Changed n_jobs from -1 to 1 to reduce memory usage (process channels sequentially instead of in parallel)
+                    # power = mne.time_frequency.tfr_array_morlet(..., n_jobs=-1).squeeze()  # prev
                     power = mne.time_frequency.tfr_array_morlet(np.expand_dims(raw.copy()._data, 0), # (n_epochs, n_channels, n_times)
                                                            sfreq=raw.info['sfreq'],
                                                            freqs=np.array(bp_freqs),
                                                            n_cycles=5., 
                                                            output='power', # alternative: output='complex', then use np.abs(temp)**2 below,
-                                                           verbose=False, n_jobs=-1).squeeze() # remove n_epoches back: (n_epochs=1, n_channels, n_freqs, n_times)
+                                                           verbose=False, n_jobs=1).squeeze() # remove n_epoches back: (n_epochs=1, n_channels, n_freqs, n_times)
                 
                     power = zscore(power, axis=-1) # normalize across time-dimension
                     power = np.mean(power, 1) # average across freq bands

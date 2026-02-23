@@ -18,7 +18,9 @@ import argparse
 # Function to extract subject IDs from MRI directory
 def get_subjects(main_datadir):
     fns = sorted(glob(os.path.join(main_datadir, 'sub-*/')))
-    fns = [fn.split('/')[-2] for fn in fns]
+    # fns = [fn.split('/')[-2] for fn in fns]  # prev
+    # Changed from split('/') to os.path.basename for cross-platform compatibility (Windows uses backslashes)
+    fns = [os.path.basename(os.path.normpath(fn)) for fn in fns]
     return fns
 
 
@@ -67,7 +69,9 @@ def main(nwb_input_dir, bids_datadir):
             session_df.loc[sii, 'Age'] = '??'
             session_df.loc[sii, 'Sex'] = '??'
             session_df.loc[sii, 'Epilepsy Diagnosis'] = 'NA'
-            session_df.loc[sii, '# of SU\nruns'] = np.NaN
+            # session_df.loc[sii, '# of SU\nruns'] = np.NaN  # prev
+            # Changed from np.NaN to np.nan due to nan format change in numpy
+            session_df.loc[sii, '# of SU\nruns'] = np.nan
     
         # Set the fMRI runs count to 2 for each subject
         session_df.loc[sii, '# of fMRI\nruns'] = 2

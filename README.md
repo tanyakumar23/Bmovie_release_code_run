@@ -2,6 +2,8 @@
 
 This repository contains Python scripts to accompany our data descriptor paper titled "Multimodal single-neuron, intracranial EEG, and fMRI brain responses during movie watching in human patients". The code includes functionalities to read and plot data from NWB and BIDS files and perform various data validation analyses.
 
+This repo runs the code from [rutishauserlab/bmovie-release-NWB-BIDS](https://github.com/rutishauserlab/bmovie-release-NWB-BIDS) and includes generated outputs (e.g. figures).
+
 ## Table of Contents
 - [Introduction](#introduction)
     - [Data Formats](#data-formats)
@@ -39,8 +41,8 @@ We recommend using Anaconda and a new environment to run the codes in this repos
 
 - Clone/download this repository to your local machine and navigate to the root directory of the repository in your terminal using the commands:
   ```bash
-  git clone https://github.com/rutishauserlab/bmovie-release-NWB-BIDS
-  cd bmovie-release-NWB-BIDS
+  git clone https://github.com/tanyakumar23/Bmovie_release_code_run.git
+  cd Bmovie_release_code_run
   ```
 
 - Create a new environment using the provided ‘make_env.yml’ file. This will create a new environment with the necessary dependencies installed. 

@@ -119,8 +119,10 @@ def main(nwb_input_dir):
                               views=vii
                               )
         
+        # Changed from colors= to sensor_colors= due to API change in MNE 1.11.0
+        # brain.add_sensors(info, trans=trans, colors=ch_colors)  # prev
         brain.add_sensors(info, trans=trans, 
-                          colors=ch_colors
+                          sensor_colors=ch_colors
                           )
         
         brain.save_image(f'elect_locs_{vii}.png')

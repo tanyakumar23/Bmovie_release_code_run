@@ -1,0 +1,28 @@
+ID,"# of SU
+runs","# of fMRI
+runs",Age,Sex,Epilepsy Diagnosis
+P41CS,2,2,21,F,Left Other
+P42CS,2,2,25,F,Not Localized
+P43CS,2,2,42,F,Left Mesial Temporal
+P44CS,1,2,53,F,Right Mesial Temporal
+P45CS,NA,2,29,F,Bitemporal
+P46CS,NA,2,41,M,NA
+P47CS,2,2,32,M,Right Mesial Temporal
+P48CS,2,2,32,F,Left Mesial Temporal
+P49CS,2,NA,24,F,Left Mesial Temporal
+P50CS,NA,2,25,M,Right Temporal Neocortical
+P51CS,2,2,17,M,Not Localized
+P53CS,2,2,60,M,Bilateral Independent Temporal
+P54CS,2,2,59,F,Right Mesial Temporal
+P55CS,2,NA,43,F,Right Mesial Temporal
+P56CS,2,NA,48,M,Bilateral Independent Temporal
+P57CS,2,NA,46,M,Left Other
+P58CS,1,NA,32,F,Right Lateral Frontal
+P59CS,NA,2,34,M,Left Mesial Temporal
+P60CS,1,2,67,M,Left Mesial Temporal
+P62CS,2,2,25,F,Right Mesial Temporal
+"Total # of
+subjects: 20","Total # of
+SU runs: 29","Total # of
+fMRI runs: 30","Mean (SD) age:
+37.75 (13.86)",11 Female,

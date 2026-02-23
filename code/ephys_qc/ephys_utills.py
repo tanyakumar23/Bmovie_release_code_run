@@ -57,12 +57,17 @@ def get_et_timebins(ET_data_pd, timebin_msec, do_op=None, data_unit='sec',
         ET_data4bin = np.hstack(( chunks.reshape(-1,1), ET_data_pd[[*etdata_colnames, additional_column]].values ))
         # to take care of pupil diameter | not sure in which dataset we needed this
         if additional_column=='PupilDiameter':
-            ET_data4bin[ET_data4bin[:,-1] == -1, -1] = np.NaN
-            ET_data4bin[ET_data4bin[:,-1] == 0, -1] = np.NaN
+            # ET_data4bin[ET_data4bin[:,-1] == -1, -1] = np.NaN  # prev
+            # ET_data4bin[ET_data4bin[:,-1] == 0, -1] = np.NaN
+            # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+            ET_data4bin[ET_data4bin[:,-1] == -1, -1] = np.nan
+            ET_data4bin[ET_data4bin[:,-1] == 0, -1] = np.nan
 
 
     if fixation_info is not None:
-        ET_data4bin[ fixation_info==0 ,1:] = np.NaN
+        # ET_data4bin[ fixation_info==0 ,1:] = np.NaN  # prev
+        # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+        ET_data4bin[ fixation_info==0 ,1:] = np.nan
 
 
     # use chunk indices to split data into bins/chunks.
@@ -89,16 +94,24 @@ def get_et_timebins(ET_data_pd, timebin_msec, do_op=None, data_unit='sec',
     if do_op=='mean' or do_op=='maxrep': 
         if ET_data4hp_bins[0][0] != 1:
             if additional_column is None:
-                add_part = [ np.array([ ad_ii, np.NaN, np.NaN]) for ad_ii in range(1,int(ET_data4hp_bins[0][0])) ]
+                # add_part = [ np.array([ ad_ii, np.NaN, np.NaN]) for ad_ii in range(1,int(ET_data4hp_bins[0][0])) ]  # prev
+                # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+                add_part = [ np.array([ ad_ii, np.nan, np.nan]) for ad_ii in range(1,int(ET_data4hp_bins[0][0])) ]
             else:
-                add_part = [ np.array([ ad_ii, np.NaN, np.NaN, np.NaN]) for ad_ii in range(1,int(ET_data4hp_bins[0][0])) ]
+                # add_part = [ np.array([ ad_ii, np.NaN, np.NaN, np.NaN]) for ad_ii in range(1,int(ET_data4hp_bins[0][0])) ]  # prev
+                # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+                add_part = [ np.array([ ad_ii, np.nan, np.nan, np.nan]) for ad_ii in range(1,int(ET_data4hp_bins[0][0])) ]
             ET_data4hp_bins = add_part + ET_data4hp_bins # Add NaNs to the beginning.
     else: 
         if ET_data4hp_bins[0][0,0] != 1:
             if additional_column is None:
-                add_part = [ np.array([ ad_ii, np.NaN, np.NaN]).reshape(-1,3) for ad_ii in range(1,int(ET_data4hp_bins[0][0,0])) ]
+                # add_part = [ np.array([ ad_ii, np.NaN, np.NaN]).reshape(-1,3) for ad_ii in range(1,int(ET_data4hp_bins[0][0,0])) ]  # prev
+                # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+                add_part = [ np.array([ ad_ii, np.nan, np.nan]).reshape(-1,3) for ad_ii in range(1,int(ET_data4hp_bins[0][0,0])) ]
             else:
-                add_part = [ np.array([ ad_ii, np.NaN, np.NaN, np.NaN]).reshape(-1,4) for ad_ii in range(1,int(ET_data4hp_bins[0][0,0])) ]
+                # add_part = [ np.array([ ad_ii, np.NaN, np.NaN, np.NaN]).reshape(-1,4) for ad_ii in range(1,int(ET_data4hp_bins[0][0,0])) ]  # prev
+                # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+                add_part = [ np.array([ ad_ii, np.nan, np.nan, np.nan]).reshape(-1,4) for ad_ii in range(1,int(ET_data4hp_bins[0][0,0])) ]
             ET_data4hp_bins = add_part + ET_data4hp_bins # Add NaNs to the beginning.
 
 
@@ -109,9 +122,13 @@ def get_et_timebins(ET_data_pd, timebin_msec, do_op=None, data_unit='sec',
         for etd_ii in ET_data4hp_bins:
             while cnt_etd < etd_ii[0]:
                 if additional_column is None:
-                    ET_data4hp_bins_filled.append( np.array([ cnt_etd, np.NaN, np.NaN]) )
+                    # ET_data4hp_bins_filled.append( np.array([ cnt_etd, np.NaN, np.NaN]) )  # prev
+                    # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+                    ET_data4hp_bins_filled.append( np.array([ cnt_etd, np.nan, np.nan]) )
                 else:
-                    ET_data4hp_bins_filled.append( np.array([ cnt_etd, np.NaN, np.NaN, np.NaN]) )
+                    # ET_data4hp_bins_filled.append( np.array([ cnt_etd, np.NaN, np.NaN, np.NaN]) )  # prev
+                    # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+                    ET_data4hp_bins_filled.append( np.array([ cnt_etd, np.nan, np.nan, np.nan]) )
                 cnt_etd += 1
             ET_data4hp_bins_filled.append(etd_ii)
             cnt_etd += 1
@@ -120,9 +137,13 @@ def get_et_timebins(ET_data_pd, timebin_msec, do_op=None, data_unit='sec',
         for etd_ii in ET_data4hp_bins:
             while cnt_etd < etd_ii[0,0]:
                 if additional_column is None:
-                    ET_data4hp_bins_filled.append( np.array([ cnt_etd, np.NaN, np.NaN]).reshape(-1,3) )
+                    # ET_data4hp_bins_filled.append( np.array([ cnt_etd, np.NaN, np.NaN]).reshape(-1,3) )  # prev
+                    # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+                    ET_data4hp_bins_filled.append( np.array([ cnt_etd, np.nan, np.nan]).reshape(-1,3) )
                 else:    
-                    ET_data4hp_bins_filled.append( np.array([ cnt_etd, np.NaN, np.NaN, np.NaN]).reshape(-1,4) )
+                    # ET_data4hp_bins_filled.append( np.array([ cnt_etd, np.NaN, np.NaN, np.NaN]).reshape(-1,4) )  # prev
+                    # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+                    ET_data4hp_bins_filled.append( np.array([ cnt_etd, np.nan, np.nan, np.nan]).reshape(-1,4) )
                 cnt_etd += 1
             ET_data4hp_bins_filled.append(etd_ii)
             cnt_etd += 1
@@ -134,14 +155,22 @@ def get_et_timebins(ET_data_pd, timebin_msec, do_op=None, data_unit='sec',
             while len(ET_data4hp_bins_filled) < nbins:
                 if do_op=='mean' or do_op=='maxrep': 
                     if additional_column is None:
-                        ET_data4hp_bins_filled.append( np.array([ET_data4hp_bins_filled[-1][0]+1, np.NaN, np.NaN]) ) # Extend with NaNs. 
+                        # ET_data4hp_bins_filled.append( np.array([ET_data4hp_bins_filled[-1][0]+1, np.NaN, np.NaN]) ) # Extend with NaNs.   # prev
+                        # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+                        ET_data4hp_bins_filled.append( np.array([ET_data4hp_bins_filled[-1][0]+1, np.nan, np.nan]) ) # Extend with NaNs. 
                     else:
-                        ET_data4hp_bins_filled.append( np.array([ET_data4hp_bins_filled[-1][0]+1, np.NaN, np.NaN, np.NaN]) ) # Extend with NaNs. 
+                        # ET_data4hp_bins_filled.append( np.array([ET_data4hp_bins_filled[-1][0]+1, np.NaN, np.NaN, np.NaN]) ) # Extend with NaNs.   # prev
+                        # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+                        ET_data4hp_bins_filled.append( np.array([ET_data4hp_bins_filled[-1][0]+1, np.nan, np.nan, np.nan]) ) # Extend with NaNs. 
                 else:
                     if additional_column is None:
-                        ET_data4hp_bins_filled.append( np.array([ET_data4hp_bins_filled[-1][0][0]+1, np.NaN, np.NaN]).reshape(-1,3)) # Extend with NaNs. 
+                        # ET_data4hp_bins_filled.append( np.array([ET_data4hp_bins_filled[-1][0][0]+1, np.NaN, np.NaN]).reshape(-1,3)) # Extend with NaNs.   # prev
+                        # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+                        ET_data4hp_bins_filled.append( np.array([ET_data4hp_bins_filled[-1][0][0]+1, np.nan, np.nan]).reshape(-1,3)) # Extend with NaNs. 
                     else:    
-                        ET_data4hp_bins_filled.append( np.array([ET_data4hp_bins_filled[-1][0][0]+1, np.NaN, np.NaN, np.NaN]).reshape(-1,4)) # Extend with NaNs. 
+                        # ET_data4hp_bins_filled.append( np.array([ET_data4hp_bins_filled[-1][0][0]+1, np.NaN, np.NaN, np.NaN]).reshape(-1,4)) # Extend with NaNs.   # prev
+                        # Changed from np.NaN to np.nan due to NaN format change in numpy 2.0
+                        ET_data4hp_bins_filled.append( np.array([ET_data4hp_bins_filled[-1][0][0]+1, np.nan, np.nan, np.nan]).reshape(-1,4)) # Extend with NaNs. 
                         
         
         elif len(ET_data4hp_bins_filled) > nbins:
